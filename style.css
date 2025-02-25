@@ -1,3 +1,10 @@
+@font-face {
+    font-family: "Bahnschrift";
+    src: url("BAHNSCHRIFT.TTF") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
     background-color: #49a2b3;
     text-align: center;
