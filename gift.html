@@ -14,6 +14,16 @@
         background-color: #fafde1;
     }
 
+    .modal-header {
+        background-color: #60874d;
+        color: #fafde1;
+    }
+
+    .modal-body {
+        color: #60874d;
+    }
+
+
     body,
     a,
     .btn {
@@ -40,13 +50,42 @@
         text-align: center;
         /* Ensures text is centered */
     }
+
+    .blossom {
+        position: absolute;
+        background-image: url('/almondblossom.png');
+        background-size: contain;
+        width: 40px;
+        height: 40px;
+        z-index: 10;
+        animation: float 15s ease-in-out infinite;
+        opacity: 0.7;
+    }
+
+    @keyframes float {
+        0% {
+            transform: translateY(0) rotate(0deg);
+            opacity: 0.7;
+        }
+
+        50% {
+            transform: translateY(-100px) rotate(180deg);
+            opacity: 0.3;
+        }
+
+        100% {
+            transform: translateY(-200px) rotate(360deg);
+            opacity: 0;
+        }
+    }
 </style>
 
 <body>
     <div class="content-wrapper center-page text-center">
+        <div id="blossom-container"></div>
         <div class="container p-5">
             <h2>Mektup</h2>
-            <p>
+            <p style="color: #60874d;">
                 Sevgilim, burada senin için özel olarak hazırladığım mektup var. Her satırında seni düşündüğümü ve
                 kalbimin hep seninle olduğunu hissediyorum.
             </p>
@@ -75,6 +114,33 @@
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function createBlossoms() {
+            const blossomContainer = document.getElementById('blossom-container');
+            for (let i = 0; i < 25; i++) {
+                const blossom = document.createElement('div');
+                blossom.classList.add('blossom');
+
+                // Random position within the viewport
+                const topPos = Math.random() * 75;
+                const leftPos = Math.random() * 75;
+
+                // Random animation duration and delay
+                const duration = 1 + Math.random() * 10; // Between 5s and 15s
+                const delay = Math.random() * 5; // Between 0s and 5s
+
+                blossom.style.top = `${topPos}%`;
+                blossom.style.left = `${leftPos}%`;
+                blossom.style.animationDuration = `${duration}s`;
+                blossom.style.animationDelay = `${delay}s`;
+
+                blossomContainer.appendChild(blossom);
+            }
+        }
+
+        window.onload = createBlossoms;
+
+    </script>
 </body>
 
 </html>
