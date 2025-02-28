@@ -7,22 +7,203 @@
     <title>❤️</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
+    <style>
+        .envelope-part {
+            transition: all 0.5s ease-in-out;
+        }
+
+        #message {
+            position: absolute;
+            width: 270px;
+            height: 180px;
+            background-color: #fff;
+            border-radius: 5px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            opacity: 0;
+            transition: all 0.5s ease-in-out;
+            z-index: -1;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .letter {
+            margin-top: 10px;
+            line-height: 1.6;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="content-wrapper center-page text-center">
-        <div class="container p-5">
-            <h2>Mektup</h2>
-            <p>
-                Sevgilim, burada senin için özel olarak hazırladığım mektup var. Her satırında seni düşündüğümü ve
-                kalbimin hep seninle olduğunu hissediyorum.
-            </p>
+    <!-- Ensure the envelope container has an id -->
+    <div id="envelope-container" class="content-wrapper center-page text-center">
+        <svg id="envelope" viewBox="0 0 200 140" xmlns="http://www.w3.org/2000/svg">
+            <!-- Envelope Body (rectangle) remains unchanged -->
+            <rect class="envelope-part" id="envelope-body" x="10" y="30" width="180" height="100" fill="#60874d"
+                stroke="#60874d" stroke-width="1" />
+            <!-- Envelope Flap (triangle) updated to #275B3A -->
+            <path class="envelope-part" id="envelope-flap" d="M10,30 L100,80 L190,30 L10,30" fill="#275B3A"
+                stroke="#275B3A" stroke-width="1" />
+            <!-- Envelope Bottom Flap (triangle, hidden initially) -->
+            <path class="envelope-part" id="bottom-flap" d="M10,130 L100,80 L190,130 L10,130" fill="#275B3A"
+                stroke="#275B3A" stroke-width="1" opacity="0" />
+            <!-- Left Flap (triangle, hidden initially) -->
+            <path class="envelope-part" id="left-flap" d="M10,30 L100,80 L10,130 L10,30" fill="#275B3A" stroke="#275B3A"
+                stroke-width="1" opacity="0" />
+            <!-- Right Flap (triangle, hidden initially) -->
+            <path class="envelope-part" id="right-flap" d="M190,30 L100,80 L190,130 L190,30" fill="#275B3A"
+                stroke="#275B3A" stroke-width="1" opacity="0" />
+        </svg>
+
+        <div id="message">
+            <svg viewBox="0 0 180 120" xmlns="http://www.w3.org/2000/svg">
+                <rect x="0" y="0" width="180" height="120" fill="#fff" stroke="#ddd" stroke-width="0.5" />
+                <line x1="20" y1="30" x2="160" y2="30" stroke="#333" stroke-width="0.5" />
+                <line x1="20" y1="50" x2="160" y2="50" stroke="#333" stroke-width="0.5" />
+                <line x1="20" y1="70" x2="160" y2="70" stroke="#333" stroke-width="0.5" />
+                <line x1="20" y1="90" x2="100" y2="90" stroke="#333" stroke-width="0.5" />
+            </svg>
         </div>
+
+        <div id="letter-modal" class="modal fade" tabindex="-1" aria-labelledby="letterModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="letterModalLabel">Mektup</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="modal-content" style="text-align: left;">
+                            <!-- Dynamic content will be rendered here -->
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="prev-button" type="button" class="btn btn-custom" disabled>Önceki</button>
+                        <button id="next-button" type="button" class="btn btn-custom">Sonraki</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div style="margin: 5%;">
-            <a href="tunnel.html" class="btn btn-custom">Geri dön</a>
-            <a href="containers.html" class="btn btn-custom">İlerle</a>
+            <a href="containers.html" class="btn btn-custom">Geri dön</a>
+            <a href="gift.html" class="btn btn-custom">İlerle</a>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const envelopeContainer = document.getElementById('envelope-container');
+        const envelopeFlap = document.getElementById('envelope-flap');
+        const bottomFlap = document.getElementById('bottom-flap');
+        const leftFlap = document.getElementById('left-flap');
+        const rightFlap = document.getElementById('right-flap');
+        const message = document.getElementById('message');
+        const modalElement = document.getElementById('letter-modal');
+        const bootstrapModal = new bootstrap.Modal(modalElement);
+        const modalContent = document.getElementById('modal-content');
+
+        const prevButton = document.getElementById('prev-button');
+        const nextButton = document.getElementById('next-button');
+
+        let isAnimating = false;
+        let isModalOpen = false;
+        let currentPage = 0;
+
+        // Modal content for each page
+        const pages = [
+            `Bazen düşebilirsin, bazen üzülebilirsin, bazen kırılabilirsin ve bazen ağlayabilirsin.
+    Ama unutma her düşüşünde, her üzülüşünde, her kırılışında ve her ağladığında yaslanacak
+    bir omzum var. Burada yazdığım "bazen" cümlelerinin hiçbir zaman gerçekleşmemesi
+    dileğiyle...`,
+
+            `Hayat bazen zor olabilir ama seninle her şey daha güzel ve daha kolay. 
+    Senin yanında olmak, seninle gülmek ve seninle ağlamak benim için büyük bir mutluluk.`,
+
+            `Her yeni güne seninle uyanmak, her gün seninle olmak, 
+    hayatımda sahip olduğum en güzel şeylerden biri. Seninle olduğum her anı çok seviyorum.`,
+
+            `Seninle birlikte geleceğe dair hayaller kurmak ve bu hayalleri birlikte gerçekleştirmek 
+    benim en büyük dileğim. Seni çok seviyorum! ❤️`
+        ];
+
+        // Display the initial modal content
+        function updateModalContent() {
+            modalContent.innerHTML = pages[currentPage];
+
+            // Disable/Enable buttons based on the page index
+            prevButton.disabled = currentPage === 0;
+            nextButton.disabled = currentPage === pages.length - 1;
+        }
+
+        envelopeContainer.addEventListener('click', function (event) {
+            if (isAnimating || isModalOpen) return;
+            isAnimating = true;
+
+            envelopeFlap.style.transform = 'rotateX(180deg)';
+            envelopeFlap.style.transformOrigin = 'top';
+
+            setTimeout(() => {
+                bottomFlap.style.opacity = '1';
+                leftFlap.style.opacity = '1';
+                rightFlap.style.opacity = '1';
+                message.style.transform = 'translate(-50%, -150%) scale(1)';
+                message.style.opacity = '1';
+                message.style.zIndex = '1';
+            }, 500);
+
+            setTimeout(() => {
+                currentPage = 0; // Reset to the first page when opening
+                updateModalContent(); // Update modal content based on the page
+                bootstrapModal.show();
+                isAnimating = false;
+                isModalOpen = true;
+            }, 1500);
+        });
+
+        // When the modal is closed, reset the envelope animation
+        modalElement.addEventListener('hidden.bs.modal', () => {
+            envelopeFlap.style.transform = 'rotateX(0deg)';
+            bottomFlap.style.opacity = '0';
+            leftFlap.style.opacity = '0';
+            rightFlap.style.opacity = '0';
+            message.style.transform = 'translate(-50%, -50%) scale(0.9)';
+            message.style.opacity = '0';
+            message.style.zIndex = '-1';
+
+            isModalOpen = false;
+        });
+
+        // Pagination button event listeners
+        prevButton.addEventListener('click', () => {
+            if (currentPage > 0) {
+                currentPage--;
+                updateModalContent();
+            }
+        });
+
+        nextButton.addEventListener('click', () => {
+            if (currentPage < pages.length - 1) {
+                currentPage++;
+                updateModalContent();
+            }
+        });
+
+
+        // If the user clicks anywhere outside the modal content (but within the modal overlay), close it.
+        window.addEventListener('click', function (event) {
+            if (event.target === modal) {
+                closeButton.click();
+            }
+        });
+    </script>
 </body>
 
 </html>
