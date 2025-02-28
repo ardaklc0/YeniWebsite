@@ -14,7 +14,7 @@ body {
 
 /* Ortada tam ekran gösterim için kullanılan genel container */
 .container {
-    background: rgba(255, 255, 255, 0.8);
+    background: #fafde1;
     padding: 40px;
     border-radius: 15px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -26,6 +26,7 @@ body {
 h1 {
     color: #8b5e3c;
     font-size: 2.5rem;
+
 }
 
 p {
