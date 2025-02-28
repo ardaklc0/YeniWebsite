@@ -8,71 +8,178 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="style.css" />
+    <style>
+        /* style.css */
+        h5 {
+            font-size: 1rem;
+            font-style: italic;
+        }
+
+        /* Set a maximum width and height for the cards */
+        .card {
+            width: 100%;
+            height: 100%;
+            margin: auto;
+            display: grid;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border-radius: 15px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #f8f9fa;
+        }
+
+        /* Card hover effect */
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Centering the content */
+        .center-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="content-wrapper center-page text-center" style="margin: 5%;">
-        <!-- 3 rows and 2 columns grid -->
+    <div class="center-page" class="text-center" style="margin: 5%;">
+        <!-- Grid of 4 rows and 4 columns -->
         <div class="row mb-4">
-            <div class="col-6">
+            <div class="col-3">
                 <div class="card" data-bs-toggle="modal" data-bs-target="#modal1" style="cursor: pointer;">
                     <div class="card-body">
                         <h5 class="card-title">Bazen</h5>
-                        <p class="card-text">Bana Tıkla</p>
                     </div>
                 </div>
             </div>
-            <div class="col-6">
+            <div class="col-3">
                 <div class="card" data-bs-toggle="modal" data-bs-target="#modal2" style="cursor: pointer;">
                     <div class="card-body">
                         <h5 class="card-title">Belki</h5>
-                        <p class="card-text">Bana Tıkla</p>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row mb-4">
-            <div class="col-6">
+            <div class="col-3">
                 <div class="card" data-bs-toggle="modal" data-bs-target="#modal3" style="cursor: pointer;">
                     <div class="card-body">
                         <h5 class="card-title">Sen</h5>
-                        <p class="card-text">Beni Aç</p>
                     </div>
                 </div>
             </div>
-            <div class="col-6">
+            <div class="col-3">
                 <div class="card" data-bs-toggle="modal" data-bs-target="#modal4" style="cursor: pointer;">
                     <div class="card-body">
                         <h5 class="card-title">Biz</h5>
-                        <p class="card-text">Bizi Aç</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-6">
-                <div class="card" data-bs-toggle="modal" data-bs-target="#modal5" style="cursor: pointer;">
-                    <div class="card-body">
-                        <h5 class="card-title">Mutluluk</h5>
-                        <p class="card-text">Oku</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-6">
-                <div class="card" data-bs-toggle="modal" data-bs-target="#modal6" style="cursor: pointer;">
-                    <div class="card-body">
-                        <h5 class="card-title">Anı</h5>
-                        <p class="card-text">Anı Tazele</p>
                     </div>
                 </div>
             </div>
         </div>
 
+        <div class="row mb-4">
+            <div class="col-3">
+                <div class="card" data-bs-toggle="modal" data-bs-target="#modal5" style="cursor: pointer;">
+                    <div class="card-body">
+                        <h5 class="card-title">Mutluluk</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="card" data-bs-toggle="modal" data-bs-target="#modal6" style="cursor: pointer;">
+                    <div class="card-body">
+                        <h5 class="card-title">Anı</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="card" data-bs-toggle="modal" data-bs-target="#modal7" style="cursor: pointer;">
+                    <div class="card-body">
+                        <h5 class="card-title">Umut</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="card" data-bs-toggle="modal" data-bs-target="#modal8" style="cursor: pointer;">
+                    <div class="card-body">
+                        <h5 class="card-title">Aşk</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-3">
+                <div class="card" data-bs-toggle="modal" data-bs-target="#modal9" style="cursor: pointer;">
+                    <div class="card-body">
+                        <h5 class="card-title">Güven</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="card" data-bs-toggle="modal" data-bs-target="#modal10" style="cursor: pointer;">
+                    <div class="card-body">
+                        <h5 class="card-title">Dostluk</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="card" data-bs-toggle="modal" data-bs-target="#modal11" style="cursor: pointer;">
+                    <div class="card-body">
+                        <h5 class="card-title">Sevgi</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="card" data-bs-toggle="modal" data-bs-target="#modal12" style="cursor: pointer;">
+                    <div class="card-body">
+                        <h5 class="card-title">Hayal</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-3">
+                <div class="card" data-bs-toggle="modal" data-bs-target="#modal13" style="cursor: pointer;">
+                    <div class="card-body">
+                        <h5 class="card-title">Sabır</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="card" data-bs-toggle="modal" data-bs-target="#modal14" style="cursor: pointer;">
+                    <div class="card-body">
+                        <h5 class="card-title">Özlem</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="card" data-bs-toggle="modal" data-bs-target="#modal15" style="cursor: pointer;">
+                    <div class="card-body">
+                        <h5 class="card-title">Destek</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="card" data-bs-toggle="modal" data-bs-target="#modal16" style="cursor: pointer;">
+                    <div class="card-body">
+                        <h5 class="card-title">Şefkat</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div style="margin: 5%;">
             <a href="tunnel.html" class="btn btn-custom">Geri dön</a>
             <a href="letter.html" class="btn btn-custom">İlerle</a>
         </div>
     </div>
+
+
+
 
     <!-- Modals -->
     <!-- Modal 1 -->
@@ -219,6 +326,172 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal 7 -->
+    <div class="modal fade" id="modal7" tabindex="-1" aria-labelledby="modal7Label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal7Label">Umut</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+                </div>
+                <div class="modal-body">
+                    <div style="text-align: left;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 8 -->
+    <div class="modal fade" id="modal8" tabindex="-1" aria-labelledby="modal8Label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal8Label">Aşk</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+                </div>
+                <div class="modal-body">
+                    <div style="text-align: left;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 9 -->
+    <div class="modal fade" id="modal9" tabindex="-1" aria-labelledby="modal9Label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal9Label">Güven</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+                </div>
+                <div class="modal-body">
+                    <div style="text-align: left;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 10 -->
+    <div class="modal fade" id="modal10" tabindex="-1" aria-labelledby="modal10Label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal10Label">Dostluk</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+                </div>
+                <div class="modal-body">
+                    <div style="text-align: left;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 11 -->
+    <div class="modal fade" id="modal11" tabindex="-1" aria-labelledby="modal11Label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal11Label">Sevgi</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+                </div>
+                <div class="modal-body">
+                    <div style="text-align: left;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 12 -->
+    <div class="modal fade" id="modal12" tabindex="-1" aria-labelledby="modal12Label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal12Label">Hayal</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+                </div>
+                <div class="modal-body">
+                    <div style="text-align: left;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 13 -->
+    <div class="modal fade" id="modal13" tabindex="-1" aria-labelledby="modal13Label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal13Label">Sabır</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+                </div>
+                <div class="modal-body">
+                    <div style="text-align: left;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 14 -->
+    <div class="modal fade" id="modal14" tabindex="-1" aria-labelledby="modal14Label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal14Label">Özlem</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+                </div>
+                <div class="modal-body">
+                    <div style="text-align: left;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 15 -->
+    <div class="modal fade" id="modal15" tabindex="-1" aria-labelledby="modal15Label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal15Label">Destek</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+                </div>
+                <div class="modal-body">
+                    <div style="text-align: left;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 16 -->
+    <div class="modal fade" id="modal16" tabindex="-1" aria-labelledby="modal16Label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal16Label">Şefkat</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+                </div>
+                <div class="modal-body">
+                    <div style="text-align: left;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
