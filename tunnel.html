@@ -1,114 +1,606 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>❤️</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Journey Through Time</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body,
+        html {
+            height: 100%;
+            margin: 0;
+            font-family: 'Bahnschrift', sans-serif;
+            scroll-behavior: smooth;
+            background-color: #49a2b3;
+            overflow-x: hidden;
+        }
+
+        .btn-custom {
+            background-color: #60874d;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: 0.3s;
+            text-decoration: none;
+            border: none;
+        }
+
+        .btn-custom:hover {
+            background-color: #4d6a3b;
+            cursor: pointer;
+        }
+
+        .hero {
+            height: 100vh;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('/api/placeholder/400/320');
+            background-size: cover;
+            background-position: center;
+            filter: blur(2px);
+            z-index: -1;
+        }
+
+        .hero-content {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 1rem;
+            width: 90%;
+            max-width: 600px;
+            color: #000;
+            border: 3px solid #0b365f;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #0b365f;
+            font-weight: bold;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #000;
+            font-weight: 500;
+        }
+
+        .scroll-arrow {
+            position: absolute;
+            bottom: 2rem;
+            animation: bounce 2s infinite;
+            color: white;
+            font-size: 2rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+            z-index: 5;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateY(0);
+            }
+
+            40% {
+                transform: translateY(-20px);
+            }
+
+            60% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .timeline {
+            position: relative;
+            padding: 0;
+            background-color: #49a2b3;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: #60874d;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+            border-radius: 3px;
+            z-index: 1;
+        }
+
+        .timeline-item {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4rem 0;
+            position: relative;
+        }
+
+        .timeline-content {
+            position: relative;
+            background-color: #fafde1;
+            border-radius: 1rem;
+            padding: 2rem;
+            width: 90%;
+            max-width: 800px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            border: 2px solid #60874d;
+            z-index: 10;
+        }
+
+        .year {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #60874d;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-weight: bold;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            z-index: 11;
+            font-size: 1.2rem;
+        }
+
+        .photo-gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 1.5rem 0;
+        }
+
+        .photo-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+            aspect-ratio: 1/1;
+        }
+
+        .photo-container:hover {
+            transform: scale(1.05);
+            z-index: 12;
+        }
+
+        .photo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border: 4px solid #49a2b3;
+            transition: all 0.3s ease;
+        }
+
+        .memory-text {
+            font-style: italic;
+            margin: 1.5rem 0;
+            color: #0b365f;
+            font-weight: 600;
+            text-align: center;
+            font-size: 1.1rem;
+            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+            line-height: 1.6;
+        }
+
+        h3 {
+            color: #0b365f;
+            font-weight: bold;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+        }
+
+        p {
+            color: #000;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .almond-blossom-bg {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .almond-blossom-bg::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('/api/placeholder/400/320');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.08;
+            z-index: 0;
+        }
+
+        .blossom {
+            position: absolute;
+            background-image: url('/api/placeholder/50/50');
+            background-size: contain;
+            width: 40px;
+            height: 40px;
+            z-index: 1;
+            animation: float 15s ease-in-out infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.7;
+            }
+
+            50% {
+                transform: translateY(-100px) rotate(180deg);
+                opacity: 0.3;
+            }
+
+            100% {
+                transform: translateY(-200px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .footer {
+            background-color: #60874d;
+            color: white;
+            text-align: center;
+            padding: 3rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('/api/placeholder/400/320');
+            background-size: cover;
+            background-position: bottom;
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        .footer-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-content h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .footer-content p {
+            color: white;
+            font-size: 1.1rem;
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 991px) {
+            .photo-gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 767.98px) {
+            .timeline::before {
+                left: 50%;
+            }
+
+            .timeline-content {
+                width: 90%;
+                margin: 0 auto;
+                padding: 2rem 1.5rem;
+            }
+
+            .photo-gallery {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+
+            .timeline-item {
+                padding: 4rem 0;
+                min-height: auto;
+            }
+
+            .hero-title {
+                font-size: 1.8rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .photo-gallery {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline-content {
+                width: 95%;
+                padding: 1.5rem 1rem;
+            }
+
+            h3 {
+                font-size: 1.5rem;
+            }
+
+            .memory-text {
+                font-size: 1rem;
+            }
+
+            p {
+                font-size: 1rem;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <div id="timeline" class="text-center">
-        <h2 id="timeline-text">Zaman Tüneli 💕</h2>
-        <p id="timeline-paragraph" style="color: #e0eed8;">Hediyemi vermeden önce geçirdiğimiz beş yılda neler
-            yaşadığımızı hatırlayalım...</p>
-        <div class="timeline-container">
-            <div class="timeline-line"></div>
-            <div class="timeline-item">
-                <div class="timeline-year">2020</div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <!-- Resme data-description ekledik -->
-                    <img src="https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg"
-                        alt="2020 Anısı" class="clickable-img"
-                        data-description="2020 yılında yaşadığımız unutulmaz anılar..." />
+
+    <!-- Timeline Section -->
+    <section class="timeline almond-blossom-bg">
+        <!-- Add floating blossoms -->
+        <div class="blossom" style="top: 10%; left: 20%;"></div>
+        <div class="blossom" style="top: 30%; left: 80%;"></div>
+        <div class="blossom" style="top: 50%; left: 10%;"></div>
+        <div class="blossom" style="top: 70%; left: 90%;"></div>
+        <div class="blossom" style="top: 90%; left: 30%;"></div>
+
+        <!-- 2020 -->
+        <div class="timeline-item" id="2020">
+            <div class="timeline-content">
+                <div class="year">2020</div>
+                <h3>How We Met</h3>
+                <div class="photo-gallery">
+                    <div class="photo-container">
+                        <img src="2020/20200609_210449.jpg" alt="Us in 2020 - 1" class="photo">
+                    </div>
+                    <div class="photo-container">
+                        <img src="2020/IMG-20200804-WA0047.jpg" alt="Us in 2020 - 2" class="photo">
+                    </div>
+                    <div class="photo-container">
+                        <img src="2020/IMG-20200807-WA0002.jpg" alt="Us in 2020 - 3" class="photo">
+                    </div>
+                    <div class="photo-container">
+                        <img src="2020/IMG-20200818-WA0056.jpg" alt="Us in 2020 - 4" class="photo">
+                    </div>
+                    <div class="photo-container">
+                        <img src="2020/IMG-20200906-WA0003.jpg" alt="Us in 2020 - 5" class="photo">
+                    </div>
+                    <div class="photo-container">
+                        <img src="2020/IMG-20200915-WA0031.jpg" alt="Us in 2020 - 6" class="photo">
+                    </div>
+                    <div class="photo-container">
+                        <img src="2020/IMG-20200927-WA0103.jpg" alt="Us in 2020 - 6" class="photo">
+                    </div>
                 </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <img src="https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg"
-                        alt="2020 Anısı" class="clickable-img"
-                        data-description="2020 yılının ikinci anısı: Güzel bir gün..." />
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-year">2021</div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <img src="https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg"
-                        alt="2021 Anısı" class="clickable-img"
-                        data-description="2021 yılındaki bu anı, özel bir hatıradır..." />
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <img src="https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg"
-                        alt="2021 Anısı" class="clickable-img" data-description="2021'in bir diğer güzel anısı..." />
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-year">2022</div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <img src="https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg"
-                        alt="2022 Anısı" class="clickable-img" data-description="2022 yılına ait özel bir hatıra..." />
-                </div>
-            </div>
-            <div class="timeline-item">
-                <div class="timeline-content">
-                    <img src="https://letsenhance.io/static/73136da51c245e80edc6ccfe44888a99/1015f/MainBefore.jpg"
-                        alt="2022 Anısı" class="clickable-img"
-                        data-description="2022 yılındaki bu anı, kalbimizde yer edindi..." />
-                </div>
+                <p class="memory-text">"That magical moment when our paths crossed for the first time..."</p>
+                <p>This is where our story began. We met at [location/event] and immediately felt a connection. Remember
+                    how we talked for hours about [shared interest]? Those first moments together will always be
+                    treasured in my heart.</p>
             </div>
         </div>
-        <div>
-            <a href="welcome.html" class="btn btn-custom mt-3" id="backBtn" style="margin: 5%;">Geri dön</a>
-            <a href="letter.html" class="btn btn-custom mt-3" id="nextBtn" style="margin: 5%;">İlerle</a>
+
+        <!-- 2021 -->
+        <div class="timeline-item" id="2021">
+            <div class="timeline-content">
+                <div class="year">2021</div>
+                <h3>Growing Together</h3>
+                <div class="photo-gallery">
+                    <div class="photo-container">
+                        <img src="2021/400138600770_105360.jpg" alt="Us in 2021 - 1" class="photo">
+                    </div>
+                    <div class="photo-container">
+                        <img src="2021/400086600554_324469.jpg" alt="Us in 2021 - 2" class="photo">
+                    </div>
+                    <div class="photo-container">
+                        <img src="2021/IMG-20210611-WA0161.jpg" alt="Us in 2021 - 3" class="photo">
+                    </div>
+                    <div class="photo-container">
+                        <img src="2021/IMG-20210706-WA0103.jpg" alt="Us in 2021 - 4" class="photo">
+                    </div>
+                </div>
+                <p class="memory-text">"Every moment with you makes life more beautiful..."</p>
+                <p>Our first full year together. We explored [places], shared countless laughs, and supported each other
+                    through challenges. Our trip to [destination] was unforgettable! Each day we learned more about each
+                    other and grew closer together.</p>
+            </div>
         </div>
+
+        <!-- 2022 -->
+        <div class="timeline-item" id="2022">
+            <div class="timeline-content">
+                <div class="year">2022</div>
+                <h3>Adventures & Discoveries</h3>
+                <div class="photo-gallery">
+                    <div class="photo-container">
+                        <img src="2022/IMG_0041.JPG" alt="Us in 2022 - 1" class="photo">
+                    </div>
+                    <div class="photo-container">
+                        <img src="2022/WhatsApp Görsel 2025-02-28 saat 19.17.02_111d3f77.jpg" alt="Us in 2022 - 2"
+                            class="photo">
+                    </div>
+                    <div class="photo-container">
+                        <img src="2022/WhatsApp Görsel 2025-02-28 saat 19.17.02_f3b7af69.jpg" alt="Us in 2022 - 3"
+                            class="photo">
+                    </div>
+                    <div class="photo-container">
+                        <img src="2022/WhatsApp Görsel 2025-02-28 saat 19.17.02_b2cf412f.jpg" alt="Us in 2022 - 4"
+                            class="photo">
+                    </div>
+                    <div class="photo-container">
+                        <img src="2022/WhatsApp Görsel 2025-02-28 saat 19.17.02_2e3ecfd1.jpg" alt="Us in 2022 - 5"
+                            class="photo">
+                    </div>
+                </div>
+                <p class="memory-text">"With you, every day is an adventure waiting to happen..."</p>
+                <p>We stepped outside our comfort zones this year. Remember when we [memorable experience]? And how we
+                    couldn't stop laughing when [funny moment]? This year taught us both that with each other by our
+                    side, we can face any challenge.</p>
+            </div>
+        </div>
+
+        <!-- 2023 -->
+        <div class="timeline-item" id="2023">
+            <div class="timeline-content">
+                <div class="year">2023</div>
+                <h3>Deeper Connections</h3>
+                <div class="photo-gallery">
+                    <div class="photo-container">
+                        <img src="2023/WhatsApp Görsel 2025-02-28 saat 19.18.32_4f0a7447.jpg" alt="Us in 2023 - 1"
+                            class="photo">
+                    </div>
+                    <div class="photo-container">
+                        <img src="2023/WhatsApp Görsel 2025-02-28 saat 19.18.32_30b24a78.jpg" alt="Us in 2023 - 2"
+                            class="photo">
+                    </div>
+                    <div class="photo-container">
+                        <img src="2023/WhatsApp Görsel 2025-02-28 saat 19.18.33_01638bec.jpg" alt="Us in 2023 - 3"
+                            class="photo">
+                    </div>
+                    <div class="photo-container">
+                        <img src="2023/WhatsApp Görsel 2025-02-28 saat 19.18.33_d672369e.jpg" alt="Us in 2023 - 4"
+                            class="photo">
+                    </div>
+                    <div class="photo-container">
+                        <img src="2023/WhatsApp Görsel 2025-02-28 saat 19.18.33_002dbe8c.jpg" alt="Us in 2023 - 5"
+                            class="photo">
+                    </div>
+                    <div class="photo-container">
+                        <img src="2023/WhatsApp Görsel 2025-02-28 saat 19.18.33_976a4976.jpg" alt="Us in 2023 - 6"
+                            class="photo">
+                    </div>
+                </div>
+                <p class="memory-text">"Each day with you, I fall more in love..."</p>
+                <p>A year of growth and deeper connection. We faced [challenges] together and celebrated [achievements].
+                    Our bond grew stronger with each passing day. I discovered so many new things about you that made me
+                    fall even more in love.</p>
+            </div>
+        </div>
+
+        <!-- 2024 -->
+        <div class="timeline-item" id="2024">
+            <div class="timeline-content">
+                <div class="year">2024</div>
+                <h3>Building Our Future</h3>
+                <div class="photo-gallery">
+                    <div class="photo-container">
+                        <img src="2024/WhatsApp Görsel 2025-02-28 saat 19.20.57_5888273b.jpg" alt="Us in 2024 - 1"
+                            class="photo">
+                    </div>
+                    <div class="photo-container">
+                        <img src="2024/WhatsApp Görsel 2025-02-28 saat 19.20.59_bba8b405.jpg" alt="Us in 2024 - 2"
+                            class="photo">
+                    </div>
+                    <div class="photo-container">
+                        <img src="2024/WhatsApp Görsel 2025-02-28 saat 19.20.59_a9fdeb47.jpg" alt="Us in 2024 - 3"
+                            class="photo">
+                    </div>
+                    <div class="photo-container">
+                        <img src="2024/WhatsApp Görsel 2025-02-28 saat 19.20.59_835232ce.jpg" alt="Us in 2024 - 4"
+                            class="photo">
+                    </div>
+                    <div class="photo-container">
+                        <img src="2024/WhatsApp Görsel 2025-02-28 saat 19.20.59_e84bcd91.jpg" alt="Us in 2024 - 5"
+                            class="photo">
+                    </div>
+                    <div class="photo-container">
+                        <img src="2024/WhatsApp Görsel 2025-02-28 saat 19.20.59_0cc13911.jpg" alt="Us in 2024 - 6"
+                            class="photo">
+                    </div>
+                    <div class="photo-container">
+                        <img src="2024/WhatsApp Görsel 2025-02-28 saat 19.20.59_8e3e4513.jpg" alt="Us in 2024 - 6"
+                            class="photo">
+                    </div>
+                </div>
+                <p class="memory-text">"With you, I've found my home and my future..."</p>
+                <p>What a year it has been! From [significant event] to [another milestone], every moment has been
+                    precious. I can't wait to see what the future holds for us. You've become such an essential part of
+                    my life that I can't imagine a day without you.</p>
+            </div>
+        </div>
+
+        <!-- 2025 -->
+        <div class="timeline-item" id="2025">
+            <div class="timeline-content">
+                <div class="year">2025</div>
+                <h3>Here's To Us</h3>
+                <div class="photo-gallery">
+                    <div class="photo-container">
+                        <img src="2025/WhatsApp Görsel 2025-02-28 saat 19.23.59_f97791e6.jpg" alt="Us in 2025 - 1"
+                            class="photo">
+                    </div>
+                    <div class="photo-container">
+                        <img src="2025/WhatsApp Görsel 2025-02-28 saat 19.25.40_e5dca384.jpg" alt="Us in 2025 - 2"
+                            class="photo">
+                    </div>
+                    <div class="photo-container">
+                        <img src="2025/WhatsApp Görsel 2025-02-28 saat 19.24.42_71b2396d.jpg" alt="Us in 2025 - 3"
+                            class="photo">
+                    </div>
+                    <div class="photo-container">
+                        <img src="2025/WhatsApp Görsel 2025-02-28 saat 19.25.40_d4cec279.jpg" alt="Us in 2025 - 4"
+                            class="photo">
+                    </div>
+                    <div class="photo-container">
+                        <img src="2025/WhatsApp Görsel 2025-02-28 saat 19.25.40_0d99e0b2.jpg" alt="Us in 2025 - 5"
+                            class="photo">
+                    </div>
+                </div>
+                <p class="memory-text">"The best is yet to come..."</p>
+                <p>We're writing this chapter right now. Every day with you is a gift, and I cherish each moment. I love
+                    you more than words can express, and I'm excited for all the adventures that await us. Thank you for
+                    being the most amazing partner I could ever ask for.</p>
+            </div>
+        </div>
+    </section>
+    <div style="margin: 5%;" class="content-wrapper center-page text-center">
+        <a href="welcome.html" class="btn btn-custom">Geri dön</a>
+        <a href="containers.html" class="btn btn-custom">İlerle</a>
     </div>
 
-    <!-- Tek Modal Tanımı -->
-    <!-- Tek Modal Tanımı -->
-    <div class="modal fade" id="descriptionModal" tabindex="-1" aria-labelledby="descriptionModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="descriptionModalLabel">Anı Açıklaması</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
-                </div>
-                <div class="modal-body">
-                    <p id="modalDescription"></p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const modalElement = document.getElementById('descriptionModal');
-            const modalDescription = document.getElementById('modalDescription');
-            const descriptionModal = new bootstrap.Modal(modalElement);
-
-            document.querySelectorAll('.clickable-img').forEach(img => {
-                img.addEventListener('click', function () {
-                    const description = this.getAttribute('data-description');
-                    modalDescription.textContent = description;
-                    descriptionModal.show();
-                });
-            });
-        });
-    </script>
 </body>
 
 </html>
