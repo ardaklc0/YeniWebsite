@@ -119,7 +119,7 @@
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="letterModalLabel">Mektup</h5>
+                        <h5 class="modal-title" id="letterModalLabel">İçimden Gelenler</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
                     </div>
                     <div class="modal-body">
@@ -161,19 +161,18 @@
 
         // Modal content for each page
         const pages = [
-            `Bazen düşebilirsin, bazen üzülebilirsin, bazen kırılabilirsin ve bazen ağlayabilirsin.
-    Ama unutma her düşüşünde, her üzülüşünde, her kırılışında ve her ağladığında yaslanacak
-    bir omzum var. Burada yazdığım "bazen" cümlelerinin hiçbir zaman gerçekleşmemesi
-    dileğiyle...`,
+            `Sana bundan yaklaşık bir ay önce bir soru sormuştum. Soru şuydu "uygulamamda sence hangi tablo
+            olsun?" ve sen de bana "Van Gogh'un tablosu olsun" demiştin. Ben tablo ismi vermesen de anlamıştım.
+            Ben dünyada biricik olan şeylerin değerini bilen biri olmaya çalışıyorum bunun örneklerinden biri
+            de sensin açıkçası. Sen biriciksin ve senin değerini bilmeye çalışıyorum.`,
 
-            `Hayat bazen zor olabilir ama seninle her şey daha güzel ve daha kolay. 
-    Senin yanında olmak, seninle gülmek ve seninle ağlamak benim için büyük bir mutluluk.`,
+            `Diyeceksin ki "ne alaka?" Alakası şu dünyada sadece bir tane olan, 1890 yılında tımarhanede yapılmış
+            ve sanatçının "şu zamana kadar en çok bu tabloya uğraştım" dediği tabloyu biriciklikten çıkarmaya 
+            ve biriciğime vermek için uğraştım. Bu tablo benim için biricikliğin sembolü oldu. Tıpkı senin gibi.`,
 
-            `Her yeni güne seninle uyanmak, her gün seninle olmak, 
-    hayatımda sahip olduğum en güzel şeylerden biri. Seninle olduğum her anı çok seviyorum.`,
-
-            `Seninle birlikte geleceğe dair hayaller kurmak ve bu hayalleri birlikte gerçekleştirmek 
-    benim en büyük dileğim. Seni çok seviyorum! ❤️`
+            `Sana bu yıl çok özel bir hediye hazırlamak istedim ve üstünde bir ay çalıştım. Her gün mesaimin bitip
+             Tuvalin başına oturmayı, renkleri karıştırmayı ve seni düşünerek resim yapmayı iple çektim. Neyse 
+             lafı uzatmayayım seni çok seviyorum! ❤️`
         ];
 
         // Display the initial modal content
@@ -254,8 +253,8 @@
                 blossom.classList.add('blossom');
 
                 // Random position within the viewport
-                const topPos = Math.random() * 75;
-                const leftPos = Math.random() * 75;
+                const topPos = Math.random() * 100;
+                const leftPos = Math.random() * 85;
 
                 // Random animation duration and delay
                 const duration = 1 + Math.random() * 10; // Between 5s and 15s
